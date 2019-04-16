@@ -86,6 +86,9 @@ class Produto(object):
             )
 
 class Compra(object):
+    def __init__(self):
+        self.produto = Produto()
+
     def getAll(self):
         with sqlite3.connect('storage.db') as conn:
             cursor = conn.cursor()
@@ -98,7 +101,7 @@ class Compra(object):
                 {
                     "id": items[0],
                     "date": items[1],
-                    "produtoId": items[2]
+                    "produto": self.produto.getById(items[2])
                 } for items in cursor.fetchall()
             ]
 
@@ -123,9 +126,25 @@ class Compra(object):
                 {
                     "id": items[0],
                     "date": items[1],
-                    "produtoId": items[2]
+                    "produto": self.produto.getById(items[2])
                 } for items in cursor.fetchall()
             ][0]
+
+    def getByDate(self, date):
+        with sqlite3.connect('storage.db') as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                    SELECT * FROM Compras WHERE date = ? ;
+                """, (date, )
+            )
+            return [
+                {
+                    "id": items[0],
+                    "date": items[1],
+                    "produto": self.produto.getById(items[2])
+                } for items in cursor.fetchall()
+            ]
 
     def update(self, id, *args):
         with sqlite3.connect('storage.db') as conn:
@@ -133,7 +152,7 @@ class Compra(object):
             cursor.execute(
                 """
                 UPDATE Compras
-                SET date = ?, produtoId = ?
+                SET date = ?, produto_id = ?
                 WHERE id = ?;
                 """, (*args, id)
             )

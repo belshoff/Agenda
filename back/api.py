@@ -1,9 +1,11 @@
 from flask import Flask, request
+from flask_cors import CORS
 from flask_restful import Resource, Api
 import db
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 class Produtos(Resource):
     def __init__(self):
@@ -43,12 +45,15 @@ class Compras(Resource):
         self.model = db.Compra()
 
     def get(self, id=None):
-        return self.model.getAll() if id is None else self.model.getById(id)
+        if request.args['date']:
+            return self.model.getByDate(request.args['date'])
+        else:
+            return []
 
     def post(self):
         body = request.json
         try:
-            self.model.insert(body['date'], body['produto_id'])
+            self.model.insert(body['date'], body['produtoId'])
         except IndexError as erro:
             return err, 400
         return self.model.getAll()[-1], 201
@@ -59,8 +64,11 @@ class Compras(Resource):
         except IndexError as err:
             return err, 400
         body = request.json
-        self.model.update(id, body['date'], body['produto_id'])
+        self.model.update(id, body['date'], body['produtoId'])
         return self.model.getById(id), 200
+
+    def options(self):
+        return ['GET, POST, PUT, DELETE, OPTIONS']
 
     def delete(self, id):
         temp = None
