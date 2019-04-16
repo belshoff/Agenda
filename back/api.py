@@ -4,8 +4,9 @@ from flask_restful import Resource, Api
 import db
 
 app = Flask(__name__)
-api = Api(app)
 CORS(app)
+api = Api(app)
+
 
 class Produtos(Resource):
     def __init__(self):
@@ -45,15 +46,18 @@ class Compras(Resource):
         self.model = db.Compra()
 
     def get(self, id=None):
-        if request.args['date']:
+        print(request.args['date'])
+        if id is not None:
+            return self.model.getById(id)
+        elif request.args['date']:
             return self.model.getByDate(request.args['date'])
         else:
-            return []
+            return {}, 204
 
     def post(self):
         body = request.json
         try:
-            self.model.insert(body['date'], body['produtoId'])
+            self.model.insert(body['date'], body['produto'])
         except IndexError as erro:
             return err, 400
         return self.model.getAll()[-1], 201
@@ -68,7 +72,7 @@ class Compras(Resource):
         return self.model.getById(id), 200
 
     def options(self):
-        return ['GET, POST, PUT, DELETE, OPTIONS']
+        return ['POST, PUT, DELETE, OPTIONS']
 
     def delete(self, id):
         temp = None

@@ -106,12 +106,14 @@ class Compra(object):
             ]
 
     def insert(self, *args):
+        self.produto.insert(args[1]['name'], args[1]['price'])
+        produto = self.produto.getAll()[-1]
         with sqlite3.connect('storage.db') as conn:
             cursor = conn.cursor()
             cursor.execute(
                 """
                 INSERT INTO Compras (date, produto_id) VALUES (?, ?)
-                """, (*args, )
+                """, (args[0], produto['id'])
             )
 
     def getById(self, id):
