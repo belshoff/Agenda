@@ -1,3 +1,9 @@
 {
-    "lang": "Português Brasileiro"
+  "lang": "Português Brasileiro",
+  "page": {
+    "label": {
+      "home": "Início",
+      "form": "Formulário"
+    }
+  }
 }

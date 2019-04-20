@@ -1,3 +1,9 @@
 {
-    "lang": "English"
+  "lang": "English",
+  "page": {
+    "label": {
+      "home": "Home",
+      "form": "Form"
+    }
+  }
 }
