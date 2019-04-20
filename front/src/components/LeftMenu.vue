@@ -2,7 +2,6 @@
   <section>
     <router-link class="link" v-for="(item, index) in links" :key="index" tag="div" :to="item.link">
       <i :class="item.icon" class="icon" />
-      <!-- <font-awesome-icon :icon="item.icon" class="icon" /> -->
       <span v-show="toShow">{{ item.label }}</span>
     </router-link>
   </section>
@@ -20,7 +19,7 @@ export default {
     return {}
   },
   computed: {
-    links() {
+    links () {
       return [
         {
           label: this.$t('page.label.home'),
@@ -28,7 +27,7 @@ export default {
           icon: 'fa fa-home'
         },
         {
-          label: this.$t('page.label.form'),
+          label: this.$tc('page.label.form', 2),
           link: 'form',
           icon: 'fab fa-wpforms'
         }
@@ -46,7 +45,7 @@ section {
   margin-right: 1rem;
 }
 .link {
-  height: 4rem;
+  height: 3rem;
   padding-left: 15px;
   display: flex;
   align-items: center;
