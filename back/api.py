@@ -4,7 +4,7 @@ from flask_restful import Resource, Api
 import db
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 api = Api(app)
 
 
@@ -46,9 +46,11 @@ class Compras(Resource):
         self.model = db.Compra()
 
     def get(self, id=None):
-        print(request.args['date'])
         if id is not None:
             return self.model.getById(id)
+        elif request.args['getAll']:
+            print(request.args['getAll'])
+            return self.model.getAll()
         elif request.args['date']:
             return self.model.getByDate(request.args['date'])
         else:
@@ -57,8 +59,8 @@ class Compras(Resource):
     def post(self):
         body = request.json
         try:
-            self.model.insert(body['date'], body['produto'])
-        except IndexError as erro:
+            self.model.insert(body['date'], body['produtos'])
+        except IndexError as err:
             return err, 400
         return self.model.getAll()[-1], 201
 
@@ -83,8 +85,8 @@ class Compras(Resource):
         self.model.delete(id)
         return temp, 200
 
-api.add_resource(Produtos, '/produtos', '/produtos/<string:id>')
-api.add_resource(Compras, '/compras', '/compras/<string:id>')
+# api.add_resource(Produtos, '/produtos', '/produtos/<string:id>')
+api.add_resource(Compras, '/api/compras', '/api/compras/<string:id>')
 
 if __name__ == '__main__':
     app.run(debug=True)
