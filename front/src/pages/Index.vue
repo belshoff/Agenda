@@ -16,7 +16,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-2 col-lg-2 postit text-left" v-for="linha in dados" :key="linha.id">
-          {{ format(linha.date) }}
+          <label class="bold">
+            {{ format(linha.date) }}
+          </label>
           <p v-for="produto in linha.produtos" :key="produto.id">
             {{ produto.name }}: {{ produto.price }}
           </p>
@@ -70,9 +72,9 @@ export default {
 <style scoped>
 .postit {
   margin: 1rem;
-  background-color: rgb(218, 209, 86);
+  background-color: rgb(246, 236, 86);
   border-left-width: 10px;
-  border-left-style: dashed;
+  border-left-style: dotted;
   border-left-color: white;
   border-radius: 0px 1rem 1rem 0px;
 }
