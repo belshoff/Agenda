@@ -10,6 +10,11 @@ export default new Router({
       path: '/',
       name: 'Index',
       component: () => import('@/pages/Index')
+    },
+    {
+      path: '/form',
+      name: 'Form',
+      component: () => import('@/pages/Form')
     }
   ]
 })
