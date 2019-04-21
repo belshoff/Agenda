@@ -46,15 +46,14 @@ class Compras(Resource):
         self.model = db.Compra()
 
     def get(self, id=None):
+        if request.args.get('date'):
+            return self.model.getByDate(str(request.args.get('date')))
         if id is not None:
             return self.model.getById(id)
-        elif request.args['getAll']:
+        if request.args['getAll']:
             print(request.args['getAll'])
             return self.model.getAll()
-        elif request.args['date']:
-            return self.model.getByDate(request.args['date'])
-        else:
-            return {}, 204
+        return {}, 204
 
     def post(self):
         body = request.json
