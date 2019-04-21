@@ -5,12 +5,10 @@
 </template>
 
 <script>
-const mainTemplate = () => System.import('@/templates/Main.vue')
-
 export default {
   name: 'App',
   components: {
-    mainTemplate
+    mainTemplate: () => import('@/templates/Main.vue')
   }
 }
 </script>
