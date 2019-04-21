@@ -37,6 +37,11 @@ export default {
       isOpen: true
     }
   },
+  created () {
+    window.onresize = () => {
+      document.location.reload(true)
+    }
+  },
   computed: {
     leftWidth () {
       return `width: ${this.isOpen ? 10 : 3}rem !important;`
@@ -64,7 +69,7 @@ export default {
 .main-screen {
   border: solid #145987 thin;
   padding-top: 15px;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke;   */
   overflow: auto;
 }
 .header {
