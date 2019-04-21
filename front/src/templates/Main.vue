@@ -42,10 +42,10 @@ export default {
       return `width: ${this.isOpen ? 10 : 3}rem !important;`
     },
     rightWidth () {
-      return `width: calc(100% - ${this.isOpen ? 10 : 3}rem);`
+      return `width: calc(100% - ${this.isOpen ? 10 : 3}rem); height: calc(${window.innerHeight}px - 3rem);`
     },
     customStyle () {
-      return `height: calc(${window.innerHeight}px - 3rem) !important;`
+      return `height: calc(${window.innerHeight}px - 3rem) !important; width: 100%; position: absolute;`
     }
   },
   methods: {
@@ -65,6 +65,7 @@ export default {
   border: solid #145987 thin;
   padding-top: 15px;
   background-color: whitesmoke;
+  overflow: auto;
 }
 .header {
   background-color: #145987;
