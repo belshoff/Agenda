@@ -7,12 +7,14 @@ import VueI18n from 'vue-i18n'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import BootstrapVue from 'bootstrap-vue'
+import VeeValidate from 'vee-validate'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-Vue.use(BootstrapVue)
 Vue.use(VueAxios, axios)
+Vue.use(BootstrapVue)
+Vue.use(VeeValidate)
 Vue.use(VueI18n)
 
 const messages = {
