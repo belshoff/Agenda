@@ -3,7 +3,18 @@
   "page": {
     "label": {
       "home": "Início",
-      "form": "Formulário | Formulários"
+      "form": "Formulário | Formulários",
+      "date": "Data | Datas",
+      "product": "Produto | Produtos",
+      "name": "Nome | Nomes",
+      "price": "Preço | Preços"
+    },
+    "header": {
+      "purchase": "Compra | Compras"
+    },
+    "alerts": {
+      "name": "Atributo \"Nome\" não preenchido.",
+      "price": "Atributo \"Preço\" não preenchido."
     }
   }
 }

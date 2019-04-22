@@ -3,7 +3,18 @@
   "page": {
     "label": {
       "home": "Home",
-      "form": "Form | Forms"
+      "form": "Form | Forms",
+      "date": "Date | Dates",
+      "product": "Product | Products",
+      "name": "Name | Names",
+      "price": "Price | Prices"
+    },
+    "header": {
+      "purchase": "Purchase | Shopping"
+    },
+    "alerts": {
+      "name": "Attribute \"Name\" not filled out.",
+      "price": "Attribute \"Price\" not filled out."
     }
   }
 }
