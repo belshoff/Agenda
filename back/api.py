@@ -26,27 +26,31 @@ class Compras(Resource):
         body = request.json
         try:
             self.model.insert(body['date'], body['produtos'])
-        except IndexError as err:
+        except Exception as err:
             return err, 400
         return self.model.getAll()[-1], 201
 
     def put(self, id):
         try:
             temp = self.model.getById(id)
-        except IndexError as err:
+        except Exception as err:
             return err, 400
         body = request.json
         self.model.update(id, body['date'], body['produtoId'])
         return self.model.getById(id), 200
 
-    def options(self):
-        return ['POST, PUT, DELETE, OPTIONS']
+    def options(self, id):
+        return {
+            "origins": "*",
+            "methods ": ["GET", "POST", "DELETE"],
+            "headers ": "*"
+        }
 
     def delete(self, id):
         temp = None
         try:
             temp = self.model.getById(id)
-        except IndexError as err:
+        except Exception as err:
             return err, 400
         self.model.delete(id)
         return temp, 200
