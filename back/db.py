@@ -144,8 +144,5 @@ class Compra(object):
     def delete(self, id):
         with sqlite3.connect('storage.db') as conn:
             cursor = conn.cursor()
-            cursor.execute(
-                """
-                DELETE FROM Compras WHERE id = ?
-                """, (id, )
-            )
+            print(f"DELETE FROM Compras WHERE id = {id}")
+            cursor.execute(f"DELETE FROM Compras WHERE id = {id}")
