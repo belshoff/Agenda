@@ -78,6 +78,12 @@ class Produto(object):
             cursor = conn.cursor()
             cursor.execute(f"DELETE FROM Produtos WHERE id = {id}")
 
+    def deleteByCompra(self, compraId):
+        with sqlite3.connect('storage.db') as conn:
+            cursor = conn.cursor()
+            print(f"DELETE FROM Produtos WHERE compra_id = {compraId}")
+            cursor.execute(f"DELETE FROM Produtos WHERE compra_id = {compraId}")
+
 class Compra(object):
     def __init__(self):
         self.produto = Produto()
@@ -144,5 +150,6 @@ class Compra(object):
     def delete(self, id):
         with sqlite3.connect('storage.db') as conn:
             cursor = conn.cursor()
+            self.produto.deleteByCompra(self.getById(id)["id"])
             print(f"DELETE FROM Compras WHERE id = {id}")
             cursor.execute(f"DELETE FROM Compras WHERE id = {id}")
