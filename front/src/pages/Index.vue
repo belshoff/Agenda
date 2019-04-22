@@ -18,13 +18,11 @@
         <div class="col-md-3 col-lg-3 postit text-center" v-for="linha in dados" :key="linha.id">
           <div class="row">
             <div class="col-md-12 col-lg-12">
-              <button class="btn btn-sm btn-warning far fa-edit" />
+              <!-- <button class="btn btn-sm btn-warning far fa-edit" /> -->
+              <label class="bold">{{ format(linha.date) }}</label>
               <button class="btn btn-sm btn-warning far fa-trash-alt" @click="del(linha.id)" />
             </div>
           </div>
-          <label class="bold">
-            {{ format(linha.date) }}
-          </label>
           <p v-for="produto in linha.produtos" :key="produto.id">
             {{ produto.name }}: {{ produto.price }}
           </p>
