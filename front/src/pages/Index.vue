@@ -15,7 +15,13 @@
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2 col-lg-2 postit text-left" v-for="linha in dados" :key="linha.id">
+        <div class="col-md-3 col-lg-3 postit text-center" v-for="linha in dados" :key="linha.id">
+          <div class="row">
+            <div class="col-md-12 col-lg-12">
+              <button class="btn btn-sm btn-warning far fa-edit" />
+              <button class="btn btn-sm btn-warning far fa-trash-alt" @click="del(linha.id)" />
+            </div>
+          </div>
           <label class="bold">
             {{ format(linha.date) }}
           </label>
@@ -57,6 +63,17 @@ export default {
       let splitDate = date.split('-')
       return `${Number(splitDate[0])}-${Number(splitDate[1])}-${Number(splitDate[2])}`
     },
+    del (id) {
+      this.axios.delete(`http://127.0.0.1:5000/api/compras/${id}`).then(
+        result => {
+          this.populate()
+        }
+      ).catch(
+        err => {
+          console.error(err)
+        }
+      )
+    },
     populate () {
       let filter = this.selectedDate !== '' ? `date=${this.requestFormat(this.selectedDate)}` : 'getAll=true'
       this.axios.get(`http://127.0.0.1:5000/api/compras?${filter}`).then(
@@ -72,7 +89,7 @@ export default {
 <style scoped>
 .postit {
   margin: 1rem;
-  background-color: rgb(246, 236, 86);
+  background-color: #ffc107;
   border-left-width: 10px;
   border-left-style: dotted;
   border-left-color: white;
